@@ -20,6 +20,7 @@ export const Card = styled.div`
   @media(max-width: 590px){
     display: flex;
     flex-direction: column;
+    padding: 10px;
   }
 `
 export const Ingredients = styled.div`
