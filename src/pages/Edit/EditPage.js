@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Headers from '../../components/Headers'
 import Context from '../../global/Context'
 import { url } from '../../constants/urls'
 import axios from 'axios'
-import { Container, Back } from './styled'
+import { Container } from './styled'
 
 
 const EditPage = ()=>{
@@ -14,6 +15,22 @@ const EditPage = ()=>{
     const [order, setOrder] = useState('')
     const [qnt, setQnt] = useState('')
     const [flavor, setFlavor] = useState({})
+
+
+
+    useEffect(()=>{
+        const token = localStorage.getItem('token')
+        const login = localStorage.getItem('login')
+
+        if(!token){
+            navigate('/login')
+        }
+
+        if(!login){
+            navigate('/')
+        }
+        
+    }, [])
 
     
     const handleOrder = (e)=>{
@@ -54,28 +71,30 @@ const EditPage = ()=>{
 
     
     return(
-        <Container>
-            <form>
-                <fieldset>
-                    <legend>Editar {edit.pizza}</legend>
-                    <select value={order} onChange={handleOrder} required>
-                        <option>Sabor</option>
-                        { pizzas && pizzas.map(pizza=>{
-                            return <option key={pizza.id}>{pizza.name}</option>
-                        })}
-                    </select><br/>
-                    Preço: R$ {flavor.price}.00<br/>
-                    Quantidade: <input type='number' min='1' value={qnt} onChange={handleQnt} required/><br/>
-                    Total: R$ {
-                        Object.keys(flavor).length !== 0 ? (flavor.price * qnt)
-                        : 0
-                    }
-                    <br/><br/>
-                    <button onSubmit={saveChanges}>Salvar alterações</button>
-                </fieldset>
-            </form>
-            <Back onClick={()=> navigate(-1)}>Voltar</Back>
-        </Container>
+        <div>
+            <Headers/>
+            <Container>
+                <form onSubmit={saveChanges}>
+                    <fieldset>
+                        <legend>Editar {edit.pizza}</legend>
+                        <select value={order} onChange={handleOrder} required>
+                            <option>Sabor</option>
+                            { pizzas && pizzas.map(pizza=>{
+                                return <option key={pizza.id}>{pizza.name}</option>
+                            })}
+                        </select><br/>
+                        Preço: R$ {flavor.price}.00<br/>
+                        Quantidade: <input type='number' min='1' value={qnt} onChange={handleQnt} required/><br/>
+                        Total: R$ {
+                            Object.keys(flavor).length !== 0 ? (flavor.price * qnt)
+                            : 0
+                        }
+                        <br/><br/>
+                        <button>Salvar alterações</button>
+                    </fieldset>
+                </form>
+            </Container>
+        </div>
     )
 }
 export default EditPage

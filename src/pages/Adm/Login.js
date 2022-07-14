@@ -1,5 +1,6 @@
-import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Headers from '../../components/Headers'
 import { url } from '../../constants/urls'
 import axios from 'axios'
 import styled from 'styled-components'
@@ -56,10 +57,16 @@ const Login = ()=>{
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
+    const login = localStorage.getItem('login')
 
     if(token){
       navigate('/adm')
     }
+
+    if(!login){
+      navigate('/')
+    }
+
   }, [])
 
 
@@ -85,23 +92,26 @@ const Login = ()=>{
 
 //=======================================Render=========================================
   return(
-    <Container>
-      <form onSubmit={login}>
-        <fieldset>
-          <legend>Login</legend>
-          <input type='email' name='email' value={form.email} onChange={onChange}
-            placeholder='teste@gmail.com' required/>
-          <input type='password' name='password' value={form.password} onChange={onChange}
-            placeholder='senha' required/>
-          <div>
-            <button>Entrar</button>            
-          </div>
-        </fieldset>
-      </form>
-      <Back onClick={()=> navigate('/')}>
-        Voltar
-      </Back>
-    </Container>
+    <div>
+      <Headers/>
+      <Container>
+        <form onSubmit={login}>
+          <fieldset>
+            <legend>Login</legend>
+            <input type='email' name='email' value={form.email} onChange={onChange}
+              placeholder='teste@gmail.com' required/>
+            <input type='password' name='password' value={form.password} onChange={onChange}
+              placeholder='senha' required/>
+            <div>
+              <button>Entrar</button>            
+            </div>
+          </fieldset>
+        </form>
+        <Back onClick={()=> navigate('/home')}>
+          Voltar
+        </Back>
+      </Container>
+    </div>
   )
 }
 export default Login

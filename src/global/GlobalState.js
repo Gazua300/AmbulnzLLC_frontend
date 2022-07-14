@@ -11,6 +11,7 @@ const GlobalState = (props)=>{
   const [pizzas, setPizzas] = useState([])
   const [detail, setDetail] = useState({})
   const [edit, setEdit] = useState({})
+  const [user, setUser] = useState({})
 
 
   useEffect(()=>{
@@ -34,8 +35,8 @@ const GlobalState = (props)=>{
   }
 
   
-  const states = { pizzas, detail, edit }
-  const setters = { setEdit }
+  const states = { pizzas, detail, edit, user }
+  const setters = { setEdit, setUser }
   const requests = { pizzaDetail }
 
   return<Context.Provider value={{ states, setters, requests }}>

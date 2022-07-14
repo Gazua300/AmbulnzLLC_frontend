@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import Context from '../../global/Context'
+import Headers from '../../components/Headers'
 import axios from 'axios'
 import { url } from '../../constants/urls'
 import { useNavigate } from 'react-router-dom'
@@ -7,12 +8,19 @@ import styled from 'styled-components'
 
 
 const Container = styled.div`
+  background-image: url('https://media.gazetadopovo.com.br/2021/07/09163516/receita-massa-pizza-bigstock-960x540.jpg');
+  height: 10vh;
+  border-radius: 10px;
+  padding: 10px;
   button{
     float: right;
     margin-top: -40px;
     border-radius: 10px;
     background-color: goldenrod;
-    cursor: pointer
+    cursor: pointer;
+  }
+  h2{
+    color: red;
   }
   h3{
     color: red;
@@ -36,6 +44,12 @@ const Msg = styled.div`
   text-align: center;
   font-size: 1.5rem;
 `
+const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
 
 
 //============================================Component================================
@@ -58,10 +72,21 @@ const Adm = ()=>{
     const decide = window.confirm('Tem certeza que deseja sair da área de Adm?')
 
     if(decide){
-      localStorage.removeItem('token')
+      localStorage.clear()
       navigate('/')
     }
   }
+
+  
+  const logoutAdm = ()=>{
+    const decide = window.confirm('Tem certeza que deseja sair da área de Adm?')
+
+    if(decide){
+      localStorage.removeItem('token')
+      navigate('/home')
+    }
+  }
+  
 
   const listOfOrders = ()=>{
     const headers = {
@@ -101,9 +126,13 @@ const Adm = ()=>{
 //=======================================Render==================================
   return(
     <Container>
+      <HeaderContainer>
+        <h2>Labe-Hut</h2>
+        <button onClick={logout}>Sair</button>
+      </HeaderContainer>
       <h3>Histórico de Pedidos</h3>
-      <button onClick={logout}>
-        Deslogar
+      <button onClick={logoutAdm}>
+        Sair de Adm
       </button>
       <div>
         {orders.length !== 0 ? orders.map(order=>{          
@@ -113,7 +142,7 @@ const Adm = ()=>{
               <b>Preço: R$ </b>{order.price}.00<br/>
               <b>Quantidade: </b>{order.quantity}<br/>
               <b>Total: R$ </b>{order.total}.00<br/>
-              <b>Data: </b>{order.date}
+              <b>Data do pedido: </b>{order.date}<br/>
               <Edit onClick={()=> editOrder(order.id)}>Editar</Edit>              
               <Delete onClick={()=> deleteOrder(order.id)}>Exluir</Delete>
             </Card>

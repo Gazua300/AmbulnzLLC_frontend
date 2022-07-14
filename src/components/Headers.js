@@ -16,19 +16,40 @@ const Container = styled.div`
     background-color: goldenrod;
     border-radius: 10px;
     cursor: pointer;
+    margin: 5px;
   }
 `
+const BtnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+
 
 //====================================Component=================================
+
 const Header = ()=>{
   const navigate = useNavigate()
+
+
+  const logout = ()=>{
+    const decide = window.confirm('Tem certeza que deseja fazer logout?')
+    
+    if(decide){
+      localStorage.clear()
+      navigate('/')
+    }
+  }
 
   return(
     <Container>
       <h2>Labe-Hut</h2>
-      <button onClick={()=> navigate('/login')}>
-        Área de Adm
-      </button>
+      <BtnContainer>
+        <button onClick={()=> navigate('/login')}>
+          Área de Adm
+        </button>
+        <button onClick={logout}>Sair</button>
+      </BtnContainer>
     </Container>
   )
 }

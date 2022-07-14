@@ -28,10 +28,3 @@ export const Container = styled.div`
         cursor: pointer;
     }
 `
-export const Back = styled.button`
-    margin-top: 50px;
-    width: 20vw;
-    background-color: goldenrod;
-    border-radius: 10px;
-    cursor: pointer;
-`

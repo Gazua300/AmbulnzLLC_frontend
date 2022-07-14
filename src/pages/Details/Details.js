@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useContext, useState, useEffect } from 'react'
+import Headers from '../../components/Headers'
 import Context from '../../global/Context'
 import axios from 'axios'
 import { url } from '../../constants/urls'
@@ -15,18 +16,41 @@ import {
 
 //==============================Component====================================
 const Details = ()=>{
-  const { states } = useContext(Context)
+  const { states, setters } = useContext(Context)
   const detail = states.detail
   const navigate = useNavigate()
   const [qnt, setQnt] = useState('')
+  
+
+
+  const userById = ()=>{
+    const headers = {
+      headers: {
+        authorization: localStorage.getItem('login') 
+      }
+    }
+    axios.get(`${url}/user`, headers).then(res=>{
+      setters.setUser(res.data)
+    }).catch(e=>{
+      alert(e.response.data)
+    })
+  }
 
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
+    const login = localStorage.getItem('login')
 
     if(token){
       navigate('/adm')
     }
+
+    if(!login){
+      navigate('/')
+    }
+
+    userById()
+    
   }, [])
 
 
@@ -50,7 +74,7 @@ const Details = ()=>{
 
     if(decide){
       axios.post(`${url}/orders`, body).then(res=>{
-        alert(res.data)
+        alert(`Venda realizada, entraremos em contato com ${states.user.phone}`)
       }).catch(err=>{
         alert(err.response.data)
       })
@@ -61,6 +85,7 @@ const Details = ()=>{
 //================================Render================================
   return(
         <Container>
+          <Headers/>
           <Card key={detail.id}>
             <Title>{detail.name}</Title>
             <Photo src={detail.photo} alt=''/><p>
