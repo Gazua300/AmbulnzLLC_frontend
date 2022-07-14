@@ -9,17 +9,29 @@ export const Container = styled.div`
     fieldset{
         width: 20vw;
         padding: 30px;
+        box-shadow: 3px 3px 6px;
     }
     legend{
         text-align: center;
     }    
     select{
         margin-bottom: 10px;
-    }
-    
+    }    
     input{
         margin-top: 10px;
         margin-bottom: 10px;
         width: 30px;
     }
+    button{
+        background-color: goldenrod;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+`
+export const Back = styled.button`
+    margin-top: 50px;
+    width: 20vw;
+    background-color: goldenrod;
+    border-radius: 10px;
+    cursor: pointer;
 `

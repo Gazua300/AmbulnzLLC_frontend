@@ -32,8 +32,9 @@ export const Ingredients = styled.div`
   }
 `
 export const IngTitle = styled.div`
-  color: goldenrod;
+  color: red;
   font-size: 1.2rem;
+  font-weight: bold;
   margin-bottom: 10px;
   text-shadow: 3px 3px 6px goldenrod;
 
@@ -43,7 +44,7 @@ export const IngTitle = styled.div`
   }
 `
 export const Title = styled.div`
-  color: goldenrod;
+  color: red;
   margin-bottom: 10px;
   font-size: 1.5rem;
   text-shadow: 3px 3px 6px goldenrod;

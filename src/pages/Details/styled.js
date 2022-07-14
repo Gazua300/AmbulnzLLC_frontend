@@ -15,7 +15,7 @@ export const Card = styled.div`
   }  
 `
 export const Title = styled.div`
-  color: goldenrod;
+  color: red;
   margin-bottom: 10px;
   font-size: 1.5rem;
   text-shadow: 3px 3px 6px goldenrod;

@@ -28,13 +28,19 @@ const Container = styled.div`
     width: 200px;
     height: 30px;
     font-size: 13.5pt;
-    color: whitesmoke;
   }
   button{
     background-color: goldenrod;
     border-radius: 10px;
     cursor: pointer;
   }
+`
+const Back = styled.button`  
+    margin-top: 50px;
+    width: 20vw;
+    background-color: goldenrod;
+    border-radius: 10px;
+    cursor: pointer;
 `
 
 
@@ -88,14 +94,13 @@ const Login = ()=>{
           <input type='password' name='password' value={form.password} onChange={onChange}
             placeholder='senha' required/>
           <div>
-            <button>Entrar</button>&nbsp;&nbsp;&nbsp;
-            <button onClick={()=> navigate('/')}>
-              Voltar
-            </button>
+            <button>Entrar</button>            
           </div>
         </fieldset>
       </form>
-
+      <Back onClick={()=> navigate('/')}>
+        Voltar
+      </Back>
     </Container>
   )
 }

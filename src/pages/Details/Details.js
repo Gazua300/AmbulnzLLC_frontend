@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { useContext, useState, useEffect } from 'react'
 import Context from '../../global/Context'
 import axios from 'axios'
@@ -72,7 +72,7 @@ const Details = ()=>{
               <button onClick={order}>
                 Confirmar Pedido
               </button>
-              <button onClick={()=> navigate('/')}>Voltar</button>
+              <button onClick={()=> navigate(-1)}>Voltar</button>
             </BtnContainer>
             </p>
           </Card>

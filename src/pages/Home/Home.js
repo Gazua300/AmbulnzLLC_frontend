@@ -1,7 +1,7 @@
-import { Card, Title, Photo, Container, Ingredients, IngTitle } from './styled'
 import { useContext, useEffect } from 'react'
 import Context from '../../global/Context'
 import { useNavigate } from 'react-router-dom'
+import { Card, Title, Photo, Container, Ingredients, IngTitle } from './styled'
 
 
 

@@ -1,11 +1,13 @@
 import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Context from '../../global/Context'
 import { url } from '../../constants/urls'
 import axios from 'axios'
-import { Container } from './styled'
+import { Container, Back } from './styled'
 
 
 const EditPage = ()=>{
+    const navigate = useNavigate()
     const { states } = useContext(Context)
     const edit = states.edit
     const pizzas = states.pizzas
@@ -53,25 +55,26 @@ const EditPage = ()=>{
     
     return(
         <Container>
-            <form onSubmit={saveChanges}>
+            <form>
                 <fieldset>
                     <legend>Editar {edit.pizza}</legend>
-                    <select value={order} onChange={handleOrder}>
+                    <select value={order} onChange={handleOrder} required>
                         <option>Sabor</option>
                         { pizzas && pizzas.map(pizza=>{
                             return <option key={pizza.id}>{pizza.name}</option>
                         })}
                     </select><br/>
                     Preço: R$ {flavor.price}.00<br/>
-                    Quantidade: <input type='number' min='1' value={qnt} onChange={handleQnt}/><br/>
+                    Quantidade: <input type='number' min='1' value={qnt} onChange={handleQnt} required/><br/>
                     Total: R$ {
                         Object.keys(flavor).length !== 0 ? (flavor.price * qnt)
                         : 0
                     }
                     <br/><br/>
-                    <button>Salvar alterações</button>
+                    <button onSubmit={saveChanges}>Salvar alterações</button>
                 </fieldset>
             </form>
+            <Back onClick={()=> navigate(-1)}>Voltar</Back>
         </Container>
     )
 }

@@ -15,7 +15,7 @@ const Container = styled.div`
     cursor: pointer
   }
   h3{
-    color: goldenrod;
+    color: red;
     text-shadow: 3px 3px 6px goldenrod;
   }
 `

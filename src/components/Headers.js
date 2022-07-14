@@ -10,7 +10,7 @@ const Container = styled.div`
   padding: 5px;
   border-radius: 5px;
   h2{
-    color: goldenrod;
+    color: red;
   }
   button{
     background-color: goldenrod;
